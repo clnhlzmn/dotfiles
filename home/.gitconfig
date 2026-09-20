@@ -4,3 +4,11 @@
   email = git@sl.holzman.ch
 [core]
 	editor = nano
+[alias]
+	st = status
+	co = checkout
+	ci = commit
+	dog = log --decorate --oneline --graph
+	doga = log --decorate --oneline --graph --all
+	dogs = log --decorate --oneline --graph --simplify-by-decoration
+	dogas = log --decorate --oneline --graph --all --simplify-by-decoration
