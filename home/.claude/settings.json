@@ -2,13 +2,16 @@
   "env": {
     "CLAUDE_CODE_IDE_SKIP_AUTO_INSTALL": "1"
   },
-  "model": "opus",
   "effortLevel": "high",
-  "tui": "default",
-  "theme": "dark",
   "modelSettings": {
     "claude-opus-5": {
       "effortLevel": "xhigh"
+    },
+    "claude-opus-5-5": {
+      "effortLevel": "high"
     }
-  }
+  },
+  "tui": "default",
+  "theme": "dark",
+  "model": "opus"
 }

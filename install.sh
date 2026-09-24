@@ -80,3 +80,5 @@ printf '.\n'
 if [ "$DRY_RUN" -eq 0 ]; then
 	printf 'Packages are separate: brew bundle --file="%s/Brewfile"\n' "$REPO_DIR"
 fi
+
+tmux source-file ~/.tmux.conf || true
