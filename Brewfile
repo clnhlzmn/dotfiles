@@ -10,6 +10,8 @@ brew "ffmpeg"
 brew "go"
 # Powerful, lightweight programming language
 brew "lua@5.4"
+# Ambitious Vim-fork focused on extensibility and agility
+brew "neovim"
 # Open-source, cross-platform JavaScript runtime environment
 brew "node"
 # Fast, efficient and secure backup program
