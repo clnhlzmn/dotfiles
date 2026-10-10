@@ -1,63 +1,53 @@
 # dotfiles
 
-Personal macOS configuration. Everything under `home/` mirrors `$HOME`, and
-`install.sh` symlinks it into place.
+Personal macOS configuration, managed with [chezmoi](https://chezmoi.io).
+
+Two things differ from a stock chezmoi setup:
+
+- The source directory is this repo at `~/dotfiles`, not `~/.local/share/chezmoi`.
+- `.chezmoiroot` sends chezmoi into `home/`, so `README.md` and `Brewfile` sit
+  above the managed tree rather than needing a `.chezmoiignore`.
 
 ## Install
 
 ```sh
-git clone <this-repo> ~/dotfiles
-cd ~/dotfiles
-./install.sh --dry-run   # see what it would do
-./install.sh
+brew install chezmoi
+git clone git@github.com:clnhlzmn/dotfiles.git ~/dotfiles
+chezmoi init --source=~/dotfiles   # records sourceDir; later commands need no flag
+chezmoi apply
 ```
 
-Existing files are never deleted — anything in the way is moved to
-`~/.dotfiles-backup/<timestamp>/` first, keeping its relative path. Re-running
-is safe: links that already point here are left alone.
-
-Packages are a separate step:
-
-```sh
-brew bundle --file=~/dotfiles/Brewfile
-```
+`home/.chezmoi.toml.tmpl` derives `sourceDir` from wherever the clone landed, so
+`~/dotfiles` is a convention rather than a requirement.
 
 ## Layout
 
 ```
-home/                    mirrors $HOME
-  .zshrc                 PATH, aliases
-  .zprofile              brew shellenv, OrbStack init
-  .tmux.conf             mouse, scrollback
-  .gitconfig             identity, editor
-  .config/git/ignore     global gitignore
-  .claude/settings.json  Claude Code settings
-Brewfile                 formulae, casks, and go/uv/npm tools
-install.sh               the symlinker
+.chezmoiroot                        "home"
+Brewfile                            formulae, casks, go/uv/npm tools
+home/                               source root
+  .chezmoi.toml.tmpl
+  .chezmoiscripts/
+  dot_zshrc dot_zprofile dot_tmux.conf dot_gitconfig
+  private_dot_config/git/ignore
+  private_dot_claude/settings.json
 ```
 
-## Adding a file
+`private_` on those two directories is load-bearing: `~/.config` and `~/.claude`
+are mode `700`, and without it chezmoi would widen them to `755`.
 
-Move it into `home/` at the path it has relative to `$HOME`, then re-run
-`install.sh` — it picks up anything new without needing to be edited.
+## Scripts
 
-```sh
-mv ~/.vimrc ~/dotfiles/home/.vimrc
-./install.sh
-```
+`apply` runs both, keyed on a content hash rather than on every run:
 
-## Deliberately not tracked
+- `10-brew-bundle.sh` — `brew bundle --no-upgrade` against the Brewfile.
+  Installs what is missing, never upgrades what is already there. Packages are
+  not a separate step.
+- `20-reload-tmux.sh` — sources `~/.tmux.conf` into a running tmux server.
 
-- `~/.ssh/config` — contains a real host, port and username.
-- `~/.config/rclone/rclone.conf` and `~/.config/immich/auth.yml` — credentials.
-- `~/.local/bin/` — two entries are symlinks into tool-managed installs (uv,
-  Claude Code), so they belong to those tools rather than here.
-- VS Code settings and extensions.
+## `.claude/settings.json`
 
-## Note on `.claude/settings.json`
-
-Claude Code writes to this file when settings change in the app. If it ever
-replaces the file instead of writing through the symlink, the link turns back
-into a regular file — `./install.sh --dry-run` will show it as needing a
-relink, and the edited version lands in the backup folder. Check
-`git -C ~/dotfiles status` after changing settings in the app.
+Claude Code rewrites this file when settings change in the app. chezmoi puts a
+plain copy in `$HOME`, so those writes stay local and surface as drift —
+`chezmoi re-add` to keep them, `chezmoi apply` to discard. Worth a
+`chezmoi status` now and then.

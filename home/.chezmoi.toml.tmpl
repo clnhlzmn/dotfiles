@@ -1,0 +1,6 @@
+# Rendered by `chezmoi init` into ~/.config/chezmoi/chezmoi.toml.
+#
+# Without this, chezmoi would look for its source state in
+# ~/.local/share/chezmoi. sourceDir points at the repo root rather than home/ —
+# the .chezmoiroot file there is what sends chezmoi down into home/.
+sourceDir = {{ .chezmoi.sourceDir | osDir | quote }}

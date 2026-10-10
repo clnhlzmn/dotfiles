@@ -1,0 +1,18 @@
+#!/bin/sh
+# Install what the Brewfile asks for. The hash below is what makes this a
+# run_onchange script: chezmoi re-runs it only when the Brewfile's contents
+# change, not on every apply.
+#
+# Brewfile hash: {{ include "../Brewfile" | sha256sum }}
+
+set -eu
+
+brewfile={{ joinPath .chezmoi.sourceDir ".." "Brewfile" | quote }}
+
+if ! command -v brew >/dev/null 2>&1; then
+	printf 'brew not found — skipping %s\n' "$brewfile" >&2
+	exit 0
+fi
+
+printf 'brew bundle --file=%s\n' "$brewfile"
+brew bundle --file="$brewfile" --no-upgrade

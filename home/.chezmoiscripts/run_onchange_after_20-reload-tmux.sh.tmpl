@@ -1,0 +1,15 @@
+#!/bin/sh
+# Push a changed ~/.tmux.conf into the running tmux server, so settings land
+# without having to restart it. Keyed on the file's contents.
+#
+# .tmux.conf hash: {{ include "dot_tmux.conf" | sha256sum }}
+
+set -eu
+
+command -v tmux >/dev/null 2>&1 || exit 0
+
+# No server running means nothing to reload — the next tmux reads the file.
+tmux has-session >/dev/null 2>&1 || exit 0
+
+printf 'tmux source-file ~/.tmux.conf\n'
+tmux source-file {{ joinPath .chezmoi.homeDir ".tmux.conf" | quote }}

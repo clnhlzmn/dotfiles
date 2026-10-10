@@ -2,6 +2,8 @@ tap "bjkish/hugin", trusted: { formulae: ["hugin-src-2025"] }
 tap "macos-fuse-t/cask"
 # Get/set bluetooth power and discoverable state
 brew "blueutil"
+# Manage your dotfiles across multiple diverse machines, securely
+brew "chezmoi"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
 # Open source programming language to build simple/reliable/efficient software
