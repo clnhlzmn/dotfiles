@@ -1,2 +1,6 @@
 export PATH="$HOME/.local/bin:$PATH"
-alias align_image_stack=/opt/homebrew/opt/hugin-src-2025/Applications/Hugin.app/Contents/MacOS/align_image_stack
+
+# Hugin's macOS build keeps this inside the app bundle; a Linux hugin package puts it on PATH.
+if [[ $OSTYPE == darwin* ]]; then
+  alias align_image_stack=/opt/homebrew/opt/hugin-src-2025/Applications/Hugin.app/Contents/MacOS/align_image_stack
+fi

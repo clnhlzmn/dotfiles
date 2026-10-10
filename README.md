@@ -20,6 +20,21 @@ chezmoi apply
 `home/.chezmoi.toml.tmpl` derives `sourceDir` from wherever the clone landed, so
 `~/dotfiles` is a convention rather than a requirement.
 
+### Linux
+
+Same steps, with the chezmoi binary in place of the Homebrew formula:
+
+```sh
+sh -c "$(curl -fsLS get.chezmoi.io)" -- -b ~/.local/bin
+git clone git@github.com:clnhlzmn/dotfiles.git ~/dotfiles
+~/.local/bin/chezmoi init --source=~/dotfiles
+~/.local/bin/chezmoi apply
+```
+
+The Brewfile is macOS-only. `10-brew-bundle.sh` skips itself when `brew` is not
+on `PATH`, so packages come from the host's package manager. The zsh files only
+take effect where zsh is the login shell.
+
 ## Layout
 
 ```

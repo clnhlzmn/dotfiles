@@ -1,5 +1,8 @@
 
-eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+# Homebrew lives here only on Apple Silicon macOS; elsewhere there is nothing to load.
+if [ -x /opt/homebrew/bin/brew ]; then
+  eval "$(/opt/homebrew/bin/brew shellenv zsh)"
+fi
 
 # Added by OrbStack: command-line tools and integration
 # This won't be added again if you remove it.
