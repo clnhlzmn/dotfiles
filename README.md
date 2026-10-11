@@ -38,8 +38,10 @@ take effect where zsh is the login shell.
 ### Dev containers
 
 `install.sh` does the Linux steps unattended, using whatever directory it was
-cloned into as the source. The devcontainer CLI runs it when given this repo as
-`--dotfiles-repository`, which is what `dcup` in `dot_zshrc` does:
+cloned into as the source, then installs Neovim from the upstream release
+tarball into `~/.local` (glibc images only). The devcontainer CLI runs it when
+given this repo as `--dotfiles-repository`, which is what `dcup` in `dot_zshrc`
+does:
 
 ```sh
 dcup [workspace] [flags]   # devcontainer up, with these dotfiles installed
@@ -55,7 +57,7 @@ straight to `devcontainer up`, so that is `dcup --remove-existing-container`.
 
 ```
 .chezmoiroot                        "home"
-install.sh                          chezmoi bootstrap for dev containers
+install.sh                          chezmoi + neovim bootstrap for dev containers
 Brewfile                            formulae, casks, go/uv/npm tools
 home/                               source root
   .chezmoi.toml.tmpl
