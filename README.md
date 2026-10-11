@@ -5,8 +5,8 @@ Personal macOS configuration, managed with [chezmoi](https://chezmoi.io).
 Two things differ from a stock chezmoi setup:
 
 - The source directory is this repo at `~/dotfiles`, not `~/.local/share/chezmoi`.
-- `.chezmoiroot` sends chezmoi into `home/`, so `README.md` and `Brewfile` sit
-  above the managed tree rather than needing a `.chezmoiignore`.
+- `.chezmoiroot` sends chezmoi into `home/`, so `README.md`, `Brewfile` and
+  `install.sh` sit above the managed tree rather than needing a `.chezmoiignore`.
 
 ## Install
 
@@ -35,10 +35,27 @@ The Brewfile is macOS-only. `10-brew-bundle.sh` skips itself when `brew` is not
 on `PATH`, so packages come from the host's package manager. The zsh files only
 take effect where zsh is the login shell.
 
+### Dev containers
+
+`install.sh` does the Linux steps unattended, using whatever directory it was
+cloned into as the source. The devcontainer CLI runs it when given this repo as
+`--dotfiles-repository`, which is what `dcup` in `dot_zshrc` does:
+
+```sh
+dcup [workspace] [flags]   # devcontainer up, with these dotfiles installed
+dcsh [workspace]           # bash in that container
+```
+
+`dcup` also bind-mounts the host's SSH agent into the container and `dcsh`
+points `SSH_AUTH_SOCK` at it. Mounts are set when a container is created, so one
+that already exists needs recreating to pick the agent up; extra flags go
+straight to `devcontainer up`, so that is `dcup --remove-existing-container`.
+
 ## Layout
 
 ```
 .chezmoiroot                        "home"
+install.sh                          chezmoi bootstrap for dev containers
 Brewfile                            formulae, casks, go/uv/npm tools
 home/                               source root
   .chezmoi.toml.tmpl

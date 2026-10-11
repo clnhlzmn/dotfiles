@@ -4,3 +4,36 @@ export PATH="$HOME/.local/bin:$PATH"
 if [[ $OSTYPE == darwin* ]]; then
   alias align_image_stack=/opt/homebrew/opt/hugin-src-2025/Applications/Hugin.app/Contents/MacOS/align_image_stack
 fi
+
+# Dev containers: bring one up with these dotfiles installed (via install.sh at
+# the repo root), then open a shell in it. HTTPS rather than the SSH remote, so
+# the clone does not depend on an agent or known_hosts inside the container.
+#
+# The host's SSH agent is bind-mounted at $_dc_agent. On macOS the source is that
+# same path, which is where OrbStack exposes the agent inside its Linux VM; the
+# launchd socket in $SSH_AUTH_SOCK is not mountable from there.
+_dc_agent=/run/host-services/ssh-auth.sock
+
+# dcup [workspace] [devcontainer up flags...], e.g. --remove-existing-container.
+dcup() {
+  local ws=. src=$SSH_AUTH_SOCK
+  local -a agent
+  if [[ $# -gt 0 && $1 != -* ]]; then
+    ws=$1
+    shift
+  fi
+  [[ $OSTYPE == darwin* ]] && src=$_dc_agent
+  if [[ -n $src ]]; then
+    agent=(--mount "type=bind,source=$src,target=$_dc_agent" --remote-env "SSH_AUTH_SOCK=$_dc_agent")
+  fi
+  devcontainer up --workspace-folder "$ws" \
+    --dotfiles-repository https://github.com/clnhlzmn/dotfiles.git \
+    $agent "$@"
+}
+
+# Mounts are fixed when a container is created, so one that predates the agent
+# mount has no socket; leave SSH_AUTH_SOCK alone there.
+dcsh() {
+  devcontainer exec --workspace-folder "${1:-.}" \
+    sh -c "[ -S $_dc_agent ] && export SSH_AUTH_SOCK=$_dc_agent; exec bash"
+}
