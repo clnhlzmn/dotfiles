@@ -4,6 +4,10 @@ tap "macos-fuse-t/cask"
 brew "blueutil"
 # Manage your dotfiles across multiple diverse machines, securely
 brew "chezmoi"
+# Open-source, cross-platform JavaScript runtime environment
+brew "node"
+# Reference implementation for the Development Containers specification
+brew "devcontainer"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
 # Open source programming language to build simple/reliable/efficient software
@@ -12,8 +16,6 @@ brew "go"
 brew "lua@5.4"
 # Ambitious Vim-fork focused on extensibility and agility
 brew "neovim"
-# Open-source, cross-platform JavaScript runtime environment
-brew "node"
 # Fast, efficient and secure backup program
 brew "restic"
 # Terminal multiplexer
