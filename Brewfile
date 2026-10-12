@@ -32,12 +32,12 @@ cask "font-atkinson-hyperlegible"
 cask "font-atkinson-hyperlegible-mono"
 # LibFUSE implementation that doesn't use kernel extensions
 cask "macos-fuse-t/cask/fuse-t", trusted: true
+# Terminal emulator that uses platform-native UI and GPU acceleration
+cask "ghostty"
 # Free and open-source image editor
 cask "gimp"
 # Web browser
 cask "google-chrome"
-# Terminal emulator as alternative to Apple's Terminal app
-cask "iterm2"
 # Create, manage and debug system and user services
 cask "launchcontrol"
 # Mouse utility to add gesture functions and smooth scrolling to 3rd party mice

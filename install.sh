@@ -44,3 +44,15 @@ if [ "$(uname -s)" = Linux ] && ! command -v nvim >/dev/null 2>&1 && [ ! -x "$bi
 		"$bin/nvim" --version | sed 1q
 	fi
 fi
+
+# chezmoi and nvim are in ~/.local/bin, which dot_zshrc puts on PATH, but a
+# container is mostly used through bash and not every image's startup files add
+# it: root's on Debian and Ubuntu do not. ~/.bashrc belongs to the image, so
+# append to it rather than have chezmoi manage the file.
+if [ "$(uname -s)" = Linux ] && ! grep -qsF '# dotfiles: ~/.local/bin' "$HOME/.bashrc"; then
+	cat >>"$HOME/.bashrc" <<'RC'
+
+# dotfiles: ~/.local/bin on PATH
+case ":$PATH:" in *":$HOME/.local/bin:"*) ;; *) PATH="$HOME/.local/bin:$PATH" ;; esac
+RC
+fi

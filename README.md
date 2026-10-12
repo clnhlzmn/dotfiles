@@ -39,9 +39,10 @@ take effect where zsh is the login shell.
 
 `install.sh` does the Linux steps unattended, using whatever directory it was
 cloned into as the source, then installs Neovim from the upstream release
-tarball into `~/.local` (glibc images only). The devcontainer CLI runs it when
-given this repo as `--dotfiles-repository`, which is what `dcup` in `dot_zshrc`
-does:
+tarball into `~/.local` (glibc images only) and appends a line to the
+container's `~/.bashrc` putting `~/.local/bin` on `PATH`. The devcontainer CLI
+runs it when given this repo as `--dotfiles-repository`, which is what `dcup` in
+`dot_zshrc` does:
 
 ```sh
 dcup [workspace] [flags]   # devcontainer up, with these dotfiles installed
