@@ -12,6 +12,8 @@ brew "devcontainer"
 brew "ffmpeg"
 # Open source programming language to build simple/reliable/efficient software
 brew "go"
+# Library for Qalculate! program
+brew "libqalculate"
 # Powerful, lightweight programming language
 brew "lua@5.4"
 # Ambitious Vim-fork focused on extensibility and agility
