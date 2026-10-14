@@ -11,3 +11,8 @@ vim.g.clipboard = {
   copy = { ["+"] = osc52.copy("+"), ["*"] = osc52.copy("*") },
   paste = { ["+"] = paste, ["*"] = paste },
 }
+
+vim.pack.add{
+  { src = 'https://github.com/neovim/nvim-lspconfig' },
+}
+vim.lsp.enable('clangd')
