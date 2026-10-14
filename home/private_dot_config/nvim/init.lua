@@ -14,7 +14,9 @@ vim.g.clipboard = {
 
 vim.pack.add{
   { src = 'https://github.com/neovim/nvim-lspconfig' },
+  { src = 'https://github.com/folke/tokyonight.nvim' },
 }
+vim.cmd.colorscheme('tokyonight')
 vim.lsp.enable('clangd')
 
 vim.diagnostic.config({
