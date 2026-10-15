@@ -19,7 +19,10 @@ vim.pack.add{
   'https://github.com/nvim-lua/plenary.nvim',
   'https://github.com/tpope/vim-sleuth',
   'https://github.com/lewis6991/gitsigns.nvim',
+  { src = 'https://github.com/Saghen/blink.cmp', version = vim.version.range('1.*') },
 }
+
+require('blink.cmp').setup()
 
 local telescope_builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>f', telescope_builtin.find_files, { desc = 'Telescope find files' })
