@@ -20,6 +20,8 @@ brew "lua@5.4"
 brew "neovim"
 # Fast, efficient and secure backup program
 brew "restic"
+# Search tool like grep and The Silver Searcher
+brew "ripgrep"
 # Terminal multiplexer
 brew "tmux"
 # Extremely fast Python package installer and resolver, written in Rust
