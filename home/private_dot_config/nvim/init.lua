@@ -34,9 +34,9 @@ vim.diagnostic.config({
 
 vim.opt.list = true
 vim.opt.listchars = {
-  tab = '» ',       -- tab: marker, then blank padding to the tab width
-  trail = '·',      -- spaces at the end of a line
-  nbsp = '␣',       -- non-breaking space (otherwise invisible)
-  extends = '›',    -- line continues off-screen to the right (with nowrap)
-  precedes = '‹',   -- line continues off-screen to the left
+  tab = '» ',
+  nbsp = '␣',
+  extends = '›',
+  precedes = '‹',
+  space = '·'
 }
