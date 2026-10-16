@@ -22,6 +22,8 @@ vim.pack.add{
   { src = 'https://github.com/Saghen/blink.cmp', version = vim.version.range('1.*') },
 }
 
+vim.lsp.enable('clangd', 'ruff', 'basedpyright', 'emmylua_ls')
+
 require('blink.cmp').setup()
 
 require('telescope').setup({
@@ -37,7 +39,6 @@ vim.keymap.set('n', '<leader>f', telescope_builtin.find_files, { desc = 'Telesco
 vim.keymap.set('n', '<leader>b', telescope_builtin.buffers, { desc = 'Telescope buffers' })
 
 vim.cmd.colorscheme('tokyonight')
-vim.lsp.enable('clangd', 'ruff', 'basedpyright')
 
 vim.diagnostic.config({
   virtual_text = true,

@@ -8,6 +8,8 @@ brew "chezmoi"
 brew "node"
 # Reference implementation for the Development Containers specification
 brew "devcontainer"
+# Lua Language Server
+brew "emmylua_ls"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
 # Open source programming language to build simple/reliable/efficient software
