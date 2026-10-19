@@ -3,7 +3,7 @@
   name = Colin Holzman
   email = git@sl.holzman.ch
 [core]
-	editor = nano
+	editor = vi
 [alias]
 	st = status
 	co = checkout
