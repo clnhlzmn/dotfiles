@@ -10,6 +10,8 @@ brew "node"
 brew "devcontainer"
 # Lua Language Server
 brew "emmylua_ls"
+# Simple, fast and user-friendly alternative to find
+brew "fd"
 # Play, record, convert, and stream select audio and video codecs
 brew "ffmpeg"
 # Open source programming language to build simple/reliable/efficient software
@@ -28,8 +30,6 @@ brew "ripgrep"
 brew "tmux"
 # Extremely fast Python package installer and resolver, written in Rust
 brew "uv"
-# Disk space visualiser
-cask "daisydisk"
 # Opens RAW files and renders them on-the-fly
 cask "fastrawviewer"
 # Web browser
@@ -44,6 +44,8 @@ cask "ghostty"
 cask "gimp"
 # Web browser
 cask "google-chrome"
+# Graphically shows disk usage within a file system
+cask "grandperspective"
 # Create, manage and debug system and user services
 cask "launchcontrol"
 # Mouse utility to add gesture functions and smooth scrolling to 3rd party mice

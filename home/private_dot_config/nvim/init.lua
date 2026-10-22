@@ -1,3 +1,4 @@
+vim.g.mapleader = " "
 vim.opt.number = true
 vim.opt.relativenumber = true
 
@@ -39,6 +40,7 @@ require('blink.cmp').setup()
 local telescope_builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>f', telescope_builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>b', telescope_builtin.buffers, { desc = 'Telescope buffers' })
+vim.keymap.set('n', '<leader>g', telescope_builtin.live_grep, { desc = 'Telescope live grep' })
 vim.keymap.set('n', '<leader>ds', telescope_builtin.lsp_document_symbols, { desc = 'Document symbols' })
 vim.keymap.set('n', '<leader>ws', telescope_builtin.lsp_dynamic_workspace_symbols, { desc = 'Workspace symbols' })
 
